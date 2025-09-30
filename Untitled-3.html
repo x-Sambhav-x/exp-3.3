@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person Class Hierarchy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .card {
+            background-color: #fff;
+            padding: 20px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 250px;
+            text-align: center;
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #0077cc;
+        }
+        .card p {
+            font-size: 16px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Person Class Hierarchy</h1>
+
+    <div class="container" id="output">
+        <!-- Output will be displayed here -->
+    </div>
+
+    <script>
+        // Base Person class
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            displayInfo() {
+                return `Name: ${this.name}, Age: ${this.age}`;
+            }
+        }
+
+        // Student subclass
+        class Student extends Person {
+            constructor(name, age, course) {
+                super(name, age);
+                this.course = course;
+            }
+
+            displayInfo() {
+                return `${super.displayInfo()}, Course: ${this.course}`;
+            }
+        }
+
+        // Teacher subclass
+        class Teacher extends Person {
+            constructor(name, age, subject) {
+                super(name, age);
+                this.subject = subject;
+            }
+
+            displayInfo() {
+                return `${super.displayInfo()}, Subject: ${this.subject}`;
+            }
+        }
+
+        // Creating instances
+        const student1 = new Student("Alice Johnson", 20, "Computer Science");
+        const teacher1 = new Teacher("Mr. Smith", 40, "Mathematics");
+
+        // Displaying results in HTML
+        const outputDiv = document.getElementById("output");
+
+        function createCard(person) {
+            const card = document.createElement("div");
+            card.className = "card";
+            const title = document.createElement("h2");
+            title.textContent = person instanceof Student ? "Student" : "Teacher";
+            const info = document.createElement("p");
+            info.textContent = person.displayInfo();
+            card.appendChild(title);
+            card.appendChild(info);
+            outputDiv.appendChild(card);
+        }
+
+        createCard(student1);
+        createCard(teacher1);
+    </script>
+</body>
+</html>
